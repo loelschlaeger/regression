@@ -1,0 +1,64 @@
+/* Basic containers.*/
+.center {
+  text-align: center;
+}
+img.page404 {
+  width: 100%;
+}
+
+/* Container for youtube video. */
+.yt-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 54%;
+}
+
+/* Style the iframe to fit in the container div with full height and width */
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Info Box for tips. Used via ::: {.rmdtip} Text :::  */
+.rmdtip {
+  padding: 1em;
+  background: white;
+  border: 2px solid #4d8d7d;
+}
+
+/* Info Box for warnings. Used via ::: {.rmdwarning} Text :::  */
+.rmdwarning {
+  padding: 1em;
+  background: white;
+  border: 2px solid red;
+}
+
+/* Box for solutions. */
+.solutionbox {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  display: none;
+}
+
+/* Button (for solutions). */
+.button{
+	background: white;
+  padding: 10px;
+  color: #4d8d7d;
+  border: 2px solid #4d8d7d;  
+    
+}
+.button:hover{
+	background: #4d8d7d;
+	color: white;
+}
+
+
+

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>1 Einfache Regression | Regression</title>
+<meta name="author" content="Lennart Oelschläger">
+<meta name="description" content="Dieses Kapitel ist gerade in Bearbeitung. 👷  1.1 Was ist die Idee? Wir möchten die Beziehung zwischen zwei Merkmalen verstehen. Zum Beispiel: Welchen Einfluss hat die Wohnfläche auf den Wert eines...">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="1 Einfache Regression | Regression">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://loelschaeger.de/regression/einfache-regression.html">
+<meta property="og:description" content="Dieses Kapitel ist gerade in Bearbeitung. 👷  1.1 Was ist die Idee? Wir möchten die Beziehung zwischen zwei Merkmalen verstehen. Zum Beispiel: Welchen Einfluss hat die Wohnfläche auf den Wert eines...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1 Einfache Regression | Regression">
+<meta name="twitter:description" content="Dieses Kapitel ist gerade in Bearbeitung. 👷  1.1 Was ist die Idee? Wir möchten die Beziehung zwischen zwei Merkmalen verstehen. Zum Beispiel: Welchen Einfluss hat die Wohnfläche auf den Wert eines...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script>
+
+    function reveal(divid) {
+
+      var x = document.getElementById(divid);  
+      
+      if (x.style.display == "none") 
+      {
+        x.style.display = "block";
+      } 
+      else {
+        x.style.display = "none";
+      }  
+    }
+
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Regression</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Suchen" aria-label="Suchen">
+</form>
+
+      <nav aria-label="Inhaltsverzeichnis"><h2>Inhaltsverzeichnis</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Willkommen</a></li>
+<li class="book-part">Das Modell</li>
+<li><a class="active" href="einfache-regression.html"><span class="header-section-number">1</span> Einfache Regression</a></li>
+<li><a class="" href="multiple-regression.html"><span class="header-section-number">2</span> Multiple Regression</a></li>
+<li class="book-part">Signifikanz</li>
+<li><a class="" href="t-test.html"><span class="header-section-number">3</span> t-Test</a></li>
+<li class="book-part">Das ganze Spiel in R</li>
+<li><a class="" href="regressionsoutput.html"><span class="header-section-number">4</span> Regressionsoutput</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/loelschlaeger/regression">Projektseite <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="einfache-regression" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Einfache Regression<a class="anchor" aria-label="anchor" href="#einfache-regression"><i class="fas fa-link"></i></a>
+</h1>
+<div class="rmdwarning">
+<p>Dieses Kapitel ist gerade in Bearbeitung. 👷</p>
+</div>
+<div id="was-ist-die-idee" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Was ist die Idee?<a class="anchor" aria-label="anchor" href="#was-ist-die-idee"><i class="fas fa-link"></i></a>
+</h2>
+<p>Wir möchten die Beziehung zwischen zwei Merkmalen verstehen. Zum Beispiel: Welchen Einfluss hat die Wohnfläche auf den Wert eines Hauses? Dafür brauchen wir Daten. Zum Glück haben wir einen Datensatz vorliegen mit Verkaufspreisen von Häusern in Boston 1990:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Zugegeben, die Daten sind alt und wahrscheinlich nicht repräsentativ für Deutschland, aber für eine Demonstration genügen sie.&lt;/p&gt;"><sup>1</sup></a> <strong>preis</strong> ist im Datensatz der Verkaufspreis in Dollar, <strong>wohnflaeche</strong> die Wohnfläche in Quadratmetern, <strong>schlafzimmer</strong> die Anzahl an Schlafzimmern und <strong>grundstueck</strong> die Grundstücksfläche in Quadratmetern.</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["preis"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["wohnflaeche"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["schlafzimmer"],"name":[3],"type":["int"],"align":["right"]},{"label":["grundstueck"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"300000","2":"226.4976","3":"4","4":"569.12402"},{"1":"370000","2":"192.8667","3":"3","4":"920.01881"},{"1":"191000","2":"127.6488","3":"3","4":"483.09581"},{"1":"195000","2":"134.5236","3":"3","4":"427.35398"},{"1":"373000","2":"233.5582","3":"4","4":"566.24403"},{"1":"466275","2":"255.8550","3":"5","4":"795.80744"},{"1":"332500","2":"192.0306","3":"3","4":"836.12736"},{"1":"315000","2":"160.8152","3":"3","4":"576.92788"},{"1":"206000","2":"164.1597","3":"3","4":"557.41824"},{"1":"240000","2":"175.5867","3":"3","4":"268.67559"},{"1":"285000","2":"217.0215","3":"4","4":"557.41824"},{"1":"300000","2":"244.7066","3":"5","4":"654.68772"},{"1":"405000","2":"313.5478","3":"3","4":"1136.85450"},{"1":"212000","2":"176.4229","3":"3","4":"600.15364"},{"1":"265000","2":"214.7918","3":"3","4":"605.63492"},{"1":"227400","2":"163.5094","3":"4","4":"334.17223"},{"1":"240000","2":"185.8061","3":"4","4":"550.17180"},{"1":"285000","2":"164.8100","3":"3","4":"661.74835"},{"1":"268000","2":"127.8346","3":"3","4":"524.15895"},{"1":"310000","2":"170.4771","3":"4","4":"799.15195"},{"1":"266000","2":"190.2654","3":"3","4":"510.40930"},{"1":"270000","2":"197.3261","3":"3","4":"724.64371"},{"1":"225000","2":"164.2526","3":"3","4":"557.69695"},{"1":"150000","2":"160.9081","3":"4","4":"484.76806"},{"1":"247000","2":"133.7804","3":"3","4":"875.61115"},{"1":"275000","2":"179.4887","3":"3","4":"568.00919"},{"1":"230000","2":"179.4887","3":"3","4":"623.37940"},{"1":"343000","2":"195.6538","3":"3","4":"796.82937"},{"1":"477500","2":"327.8548","3":"7","4":"780.38554"},{"1":"350000","2":"190.5441","3":"4","4":"907.94141"},{"1":"230000","2":"146.1365","3":"4","4":"446.49201"},{"1":"335000","2":"262.8227","3":"4","4":"1401.53526"},{"1":"251000","2":"151.4320","3":"3","4":"535.40022"},{"1":"235000","2":"170.9416","3":"4","4":"593.00010"},{"1":"361000","2":"191.9377","3":"4","4":"836.12736"},{"1":"190000","2":"158.1210","3":"4","4":"325.16064"},{"1":"360000","2":"255.4834","3":"4","4":"1011.89991"},{"1":"575000","2":"360.4638","3":"5","4":"1452.44613"},{"1":"209001","2":"172.2422","3":"4","4":"594.57946"},{"1":"225000","2":"132.0152","3":"2","4":"824.97900"},{"1":"246000","2":"154.4049","3":"3","4":"586.58979"},{"1":"713500","2":"309.4600","3":"5","4":"2622.74572"},{"1":"248000","2":"153.8474","3":"4","4":"654.96643"},{"1":"230000","2":"108.7895","3":"3","4":"492.85063"},{"1":"375000","2":"213.0267","3":"5","4":"616.59748"},{"1":"265000","2":"163.8810","3":"3","4":"727.80242"},{"1":"313000","2":"257.1556","3":"3","4":"92.90304"},{"1":"417500","2":"346.8070","3":"4","4":"753.62946"},{"1":"253000","2":"142.6991","3":"3","4":"543.48278"},{"1":"315000","2":"152.1752","3":"4","4":"618.73425"},{"1":"264000","2":"183.2048","3":"3","4":"616.59748"},{"1":"255000","2":"137.3107","3":"2","4":"1418.35071"},{"1":"210000","2":"130.8075","3":"3","4":"478.07904"},{"1":"180000","2":"168.3403","3":"3","4":"558.99759"},{"1":"250000","2":"159.9790","3":"3","4":"781.31457"},{"1":"250000","2":"165.3674","3":"4","4":"522.57960"},{"1":"209000","2":"155.5197","3":"4","4":"520.25702"},{"1":"258000","2":"171.8706","3":"4","4":"606.19234"},{"1":"289000","2":"178.8384","3":"3","4":"562.99242"},{"1":"316000","2":"217.6718","3":"4","4":"514.58994"},{"1":"225000","2":"145.5791","3":"3","4":"702.90440"},{"1":"266000","2":"154.5907","3":"4","4":"509.48027"},{"1":"310000","2":"128.7636","3":"6","4":"496.84546"},{"1":"471250","2":"243.1273","3":"5","4":"1471.02674"},{"1":"335000","2":"215.6280","3":"4","4":"745.26819"},{"1":"495000","2":"245.0782","3":"4","4":"1111.67778"},{"1":"279500","2":"177.9093","3":"4","4":"785.95972"},{"1":"380000","2":"240.5260","3":"4","4":"1403.30042"},{"1":"325000","2":"251.6743","3":"4","4":"1008.83411"},{"1":"220000","2":"147.4371","3":"3","4":"585.28915"},{"1":"215000","2":"157.3777","3":"3","4":"1073.40172"},{"1":"240000","2":"142.6991","3":"3","4":"557.41824"},{"1":"725000","2":"340.2109","3":"5","4":"2879.99424"},{"1":"230000","2":"161.2797","3":"3","4":"376.62892"},{"1":"306000","2":"204.8512","3":"2","4":"1923.09293"},{"1":"425000","2":"139.5404","3":"3","4":"513.28930"},{"1":"318000","2":"157.5636","3":"4","4":"8610.34665"},{"1":"330000","2":"203.0860","3":"3","4":"759.76106"},{"1":"246000","2":"179.1171","3":"4","4":"552.21567"},{"1":"225000","2":"120.2165","3":"3","4":"1750.10747"},{"1":"111000","2":"142.6062","3":"4","4":"400.87662"},{"1":"268125","2":"183.9480","3":"3","4":"480.03001"},{"1":"244000","2":"194.1674","3":"4","4":"733.28369"},{"1":"295000","2":"170.6629","3":"3","4":"562.62081"},{"1":"236000","2":"159.3287","3":"3","4":"541.43892"},{"1":"202500","2":"146.2294","3":"3","4":"589.09818"},{"1":"219000","2":"110.0901","3":"2","4":"591.04914"},{"1":"242000","2":"164.8100","3":"4","4":"459.87005"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Wir konzentrieren uns zunächst nur auf die Wohnfläche und die damit verbundenen Verkaufspreise. Ein Streudiagramm der Daten sieht so aus:</p>
+<div class="inline-figure"><img src="01-01-einfache-regression_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<p>Da scheint es einen Zusammenhang zu geben: Wenig überraschened haben Häuser mit einer größeren Wohnfläche einen höheren Verkaufspreis erzielt. Wir fragen uns jetzt:</p>
+<ol style="list-style-type: decimal">
+<li><p>Um wie viel Euro steigt der Wert eines Haus mit einem zusätzlichen Quadratmeter an Wohnfläche?</p></li>
+<li><p>Und was ist wohl der Wert unseres eigenen Hauses mit einer Wohnfläche von <span class="math inline">\(x\)</span> Quadratmetern?</p></li>
+</ol>
+<p>Die Antworten kann uns ein Modell liefern.</p>
+</div>
+<div id="was-für-ein-modell" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Was für ein Modell?<a class="anchor" aria-label="anchor" href="#was-f%C3%BCr-ein-modell"><i class="fas fa-link"></i></a>
+</h2>
+<p>Da gibt es verschiedene Möglichkeiten, aber eine naheliegende Idee für den Anfang ist ein lineares Modell der Form</p>
+<p><span class="math display" id="eq:slr">\[\begin{equation}
+\text{Verkaufspreis} = \beta_0 + \beta_1 \text{Wohnfläche}.
+\tag{1.1}
+\end{equation}\]</span></p>
+<p>Das Modell berechnet also den Verkaufspreis, indem die Wohnfläche mit einem Koeffizienten <span class="math inline">\(\beta_1\)</span> multipliziert und der Koeffizient <span class="math inline">\(\beta_0\)</span> addiert wird - eine klassische, lineare Funktion. Grafisch sieht das zum Beispiel so aus:</p>
+<div class="inline-figure"><img src="01-01-einfache-regression_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<p>Ich habe <span class="math inline">\(\beta_0 = 11000\)</span> und <span class="math inline">\(\beta_1 = 1500\)</span> gewählt, damit die blaue Linie möglichst gut durch die Punkte führt. Wir bekommen hier schon die erste Vorstellung, dass ein zusätzlicher Quadratmeter an Wohnfläche den Wert des Hauses um <span class="math inline">\(1500\)</span> Dollar anhebt, und dass ein Haus mit <span class="math inline">\(300m^2\)</span> Wohnfläche circa <span class="math inline">\(11000 + 1500 \cdot 300 = 461000\)</span> Dollar Wert sein könnte.</p>
+<p>Es gibt aber noch etwas zu beachten:</p>
+<ol style="list-style-type: decimal">
+<li><p>Die Werte für <span class="math inline">\(\beta_0\)</span> und <span class="math inline">\(\beta_1\)</span> habe ich geraten. Das ist ungenau, wir wünschen uns ein Verfahren mit denen diese Werte aus den Daten berechnet werden können.</p></li>
+<li><p>Die Datenpunkte weichen von unserer linearen Funktion ab, der Verkaufspreis kann also nicht exakt durch die Wohnfläche bestimmt werden. Unser Modell braucht also noch eine Ergänzung, die mit Messfehlern umgehen kann.</p></li>
+</ol>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Willkommen</a></div>
+<div class="next"><a href="multiple-regression.html"><span class="header-section-number">2</span> Multiple Regression</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="Auf dieser Seite"><h2>Auf dieser Seite</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#einfache-regression"><span class="header-section-number">1</span> Einfache Regression</a></li>
+<li><a class="nav-link" href="#was-ist-die-idee"><span class="header-section-number">1.1</span> Was ist die Idee?</a></li>
+<li><a class="nav-link" href="#was-f%C3%BCr-ein-modell"><span class="header-section-number">1.2</span> Was für ein Modell?</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/loelschlaeger/regression/blob/master/01-01-einfache-regression.Rmd">Quelltext anzeigen <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/loelschlaeger/regression/edit/master/01-01-einfache-regression.Rmd">Seite bearbeiten <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>Von <a class="text-light" href="https://loelschlaeger.de">Lennart Oelschläger</a>. Letztes Update am 09.04.2023.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>Erstellt mit dem <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

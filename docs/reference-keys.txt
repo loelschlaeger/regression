@@ -1,0 +1,7 @@
+eq:slr
+einfache-regression
+was-ist-die-idee
+was-für-ein-modell
+multiple-regression
+t-test
+regressionsoutput

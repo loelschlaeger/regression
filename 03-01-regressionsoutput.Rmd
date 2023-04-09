@@ -1,0 +1,47 @@
+# (PART) Das ganze Spiel in R {-}
+
+# Regressionsoutput
+
+::: {.rmdwarning}
+Dieses Kapitel ist gerade in Bearbeitung. &#128119;
+:::
+
+<div class="yt-container">
+  <iframe class="responsive-iframe" src="https://www.youtube.com/embed/NEfjirpOj7s?rel=0&autoplay=0&showinfo=0" frameborder="0"></iframe>
+</div>
+
+```{r, include = FALSE}
+library(dplyr)
+data <- wooldridge::hprice1 %>% 
+  summarize(
+    preis = price * 1000, 
+    wohnflaeche = sqrft * 0.09290304, 
+    schlafzimmer = bdrms,
+    grundstueck = lotsize * 0.09290304
+  )
+```
+
+1. Datengrundlage
+
+```{r}
+str(data)
+```
+
+2. Modellformel definieren
+
+```{r}
+formula <- preis ~ wohnflaeche + I(schlafzimmer > 4) + grundstueck
+```
+
+3. Die R Funktion `lm()` mit den Daten und der Modellformel aufrufen
+
+```{r}
+model <- lm(formula = formula, data = data)
+```
+
+4. Die `summary()` Funktion liefert das Ergebnis
+
+```{r}
+summary(model)
+```
+

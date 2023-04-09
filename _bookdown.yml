@@ -1,0 +1,20 @@
+new_session: true
+delete_merged_file: true
+output_dir: "docs"
+language:
+  label:
+    fig: 'Abbildung '
+    tab: 'Tabelle '
+    eq: 'Gleichung '
+    thm: 'Satz '
+    lem: 'Lemma '
+    cor: 'Korollar '
+    prp: 'Proposition '
+    cnj: 'Schlussfolgerung '
+    def: 'Definition '
+    exm: 'Beispiel '
+    exr: 'Übung '
+    hyp: 'Hypothese '
+    proof: 'Beweis. '
+    remark: 'Anmerkung. '
+    solution: 'Lösung. '
