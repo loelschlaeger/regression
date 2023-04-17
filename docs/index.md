@@ -1,7 +1,7 @@
 --- 
 title: "Regression"
 author: "Lennart Oelschläger"
-date: "09.04.2023"
+date: "17.04.2023"
 description: |
   Eine Einführung in Regression
 site: bookdown::bookdown_site
